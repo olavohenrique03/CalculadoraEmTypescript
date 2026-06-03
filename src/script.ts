@@ -1,46 +1,59 @@
 const display = document.querySelector("#display") as HTMLDivElement;
 const buttons = document.querySelectorAll(".btn");
 
-let firthNumber = '';
+let firstNumber = '';
 let secundNumber = '';
-let currentOperation: Operation | null = null; 
+let currentOperation: Operation | null = null;
+
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
 
         const valor = button.textContent;
 
-        // Limpa o campo display
-        if (valor === 'AC') {
-            firthNumber = '';
-            secundNumber = '';
-            currentOperation = null;
-            display.textContent = '0'; 
+        try {
 
-        // chama a função calcular se já selecionou um operador 
-        } else if (valor === '=') {
-            if (currentOperation === null) {
-                return;
+            // Limpa o campo display
+            if (valor === 'AC') {
+                firstNumber = '';
+                secundNumber = '';
+                currentOperation = null;
+                display.textContent = '0'; 
+
+            // chama a função calcular se já selecionou um operador 
+            } else if (valor === '=') {
+                if (currentOperation === null) {
+                    return;
+                } else {
+                    const resultado = calcular(Number(firstNumber), Number(secundNumber), currentOperation)
+                    display.textContent = resultado.toString();
+
+                    // apos o calculo o primeiro numero passa a ser o resultado e zera o segundo valor e o operador.
+                    firstNumber = resultado.toString();
+                    secundNumber = '';
+                    currentOperation = null;
+                }
+
+            // verifica de foi selecionado um desses operadores
+            } else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
+                currentOperation = valor;
+                display.textContent = currentOperation;
+
+            // adiciona os valores as variaveis 
             } else {
-                const resultado = calcular(Number(firthNumber), Number(secundNumber), currentOperation)
-                display.textContent = resultado.toString();
+
+                if (currentOperation === null) {
+                    firstNumber += valor;
+                    display.textContent = firstNumber;
+                } else {
+                    secundNumber += valor
+                    display.textContent = secundNumber
+                }
             }
-
-        } else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
-            currentOperation = valor;
-            display.textContent = currentOperation;
-
-        } else {
-
-            if (currentOperation === null) {
-                firthNumber += valor;
-                display.textContent = firthNumber;
-            } else {
-                secundNumber += valor
-                display.textContent = secundNumber
-            }
+            
+        } catch (Error) {
+             display.textContent = "Não é possível dividir por zero!";
         }
-       
     }) 
 })
 

@@ -1,40 +1,48 @@
 "use strict";
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll(".btn");
-let firthNumber = '';
+let firstNumber = '';
 let secundNumber = '';
 let currentOperation = null;
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const valor = button.textContent;
-        if (valor === 'AC') {
-            firthNumber = '';
-            secundNumber = '';
-            currentOperation = null;
-            display.textContent = '0';
-        }
-        else if (valor === '=') {
-            if (currentOperation === null) {
-                return;
+        try {
+            if (valor === 'AC') {
+                firstNumber = '';
+                secundNumber = '';
+                currentOperation = null;
+                display.textContent = '0';
+            }
+            else if (valor === '=') {
+                if (currentOperation === null) {
+                    return;
+                }
+                else {
+                    const resultado = calcular(Number(firstNumber), Number(secundNumber), currentOperation);
+                    display.textContent = resultado.toString();
+                    firstNumber = resultado.toString();
+                    secundNumber = '';
+                    currentOperation = null;
+                }
+            }
+            else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
+                currentOperation = valor;
+                display.textContent = currentOperation;
             }
             else {
-                const resultado = calcular(Number(firthNumber), Number(secundNumber), currentOperation);
-                display.textContent = resultado.toString();
+                if (currentOperation === null) {
+                    firstNumber += valor;
+                    display.textContent = firstNumber;
+                }
+                else {
+                    secundNumber += valor;
+                    display.textContent = secundNumber;
+                }
             }
         }
-        else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
-            currentOperation = valor;
-            display.textContent = currentOperation;
-        }
-        else {
-            if (currentOperation === null) {
-                firthNumber += valor;
-                display.textContent = firthNumber;
-            }
-            else {
-                secundNumber += valor;
-                display.textContent = secundNumber;
-            }
+        catch (Error) {
+            display.textContent = "Não é possível dividir por zero!";
         }
     });
 });
