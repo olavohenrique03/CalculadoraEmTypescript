@@ -20,32 +20,35 @@ buttons.forEach(button => {
                 }
                 else {
                     const resultado = calcular(Number(firstNumber), Number(secundNumber), currentOperation);
-                    display.textContent = resultado.toString();
                     firstNumber = resultado.toString();
                     secundNumber = '';
                     currentOperation = null;
+                    atualizarDisplay();
                 }
             }
             else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
                 currentOperation = valor;
-                display.textContent = currentOperation;
+                atualizarDisplay();
             }
             else {
                 if (currentOperation === null) {
                     firstNumber += valor;
-                    display.textContent = firstNumber;
+                    atualizarDisplay();
                 }
                 else {
                     secundNumber += valor;
-                    display.textContent = secundNumber;
+                    atualizarDisplay();
                 }
             }
         }
-        catch (Error) {
+        catch (error) {
             display.textContent = "Não é possível dividir por zero!";
         }
     });
 });
+const atualizarDisplay = () => {
+    display.textContent = `${firstNumber} ${currentOperation ?? ''} ${secundNumber}`;
+};
 const somar = (n1, n2) => {
     return n1 + n2;
 };

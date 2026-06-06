@@ -26,36 +26,42 @@ buttons.forEach(button => {
                     return;
                 } else {
                     const resultado = calcular(Number(firstNumber), Number(secundNumber), currentOperation)
-                    display.textContent = resultado.toString();
 
-                    // apos o calculo o primeiro numero passa a ser o resultado e zera o segundo valor e o operador.
+                    // apos o calculo, o primeiro numero passa a ser o resultado e zera o segundo valor e o operador.
                     firstNumber = resultado.toString();
                     secundNumber = '';
                     currentOperation = null;
+
+                    atualizarDisplay();
                 }
 
             // verifica de foi selecionado um desses operadores
             } else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
                 currentOperation = valor;
-                display.textContent = currentOperation;
+                atualizarDisplay();
 
             // adiciona os valores as variaveis 
             } else {
 
                 if (currentOperation === null) {
                     firstNumber += valor;
-                    display.textContent = firstNumber;
+                    atualizarDisplay();
                 } else {
                     secundNumber += valor
-                    display.textContent = secundNumber
+                    atualizarDisplay();
                 }
             }
             
-        } catch (Error) {
+        } catch (error) {
              display.textContent = "Não é possível dividir por zero!";
         }
     }) 
 })
+
+// FUNÇÃO ATUALIZAR DISPLAY
+const atualizarDisplay = () => {
+    display.textContent = `${firstNumber} ${currentOperation ?? ''} ${secundNumber}`;
+}
 
 
 // FUNÇÕES OPERAÇÕES
