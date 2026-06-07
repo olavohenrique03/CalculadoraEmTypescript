@@ -2,22 +2,20 @@ const display = document.querySelector("#display") as HTMLDivElement;
 const buttons = document.querySelectorAll(".btn");
 
 let firstNumber = '';
-let secundNumber = '';
+let secondNumber = '';
 let currentOperation: Operation | null = null;
 
 
 buttons.forEach(button => {
     button.addEventListener('click', () => {
 
-        const valor = button.textContent;
+        const valor = button.textContent!;
 
         try {
 
             // Limpa o campo display
             if (valor === 'AC') {
-                firstNumber = '';
-                secundNumber = '';
-                currentOperation = null;
+                resetarCalculadora();
                 display.textContent = '0'; 
 
             // chama a função calcular se já selecionou um operador 
@@ -25,19 +23,19 @@ buttons.forEach(button => {
                 if (currentOperation === null) {
                     return;
                 } else {
-                    const resultado = calcular(Number(firstNumber), Number(secundNumber), currentOperation)
+                    const resultado = calcular(Number(firstNumber), Number(secondNumber), currentOperation)
 
                     // apos o calculo, o primeiro numero passa a ser o resultado e zera o segundo valor e o operador.
                     firstNumber = resultado.toString();
-                    secundNumber = '';
+                    secondNumber = '';
                     currentOperation = null;
 
                     atualizarDisplay();
                 }
 
             // verifica de foi selecionado um desses operadores
-            } else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
-                currentOperation = valor;
+            } else if (operation.includes(valor as Operation)) { // includes = Se tiver no array retorna true
+                currentOperation = valor as Operation;
                 atualizarDisplay();
 
             // adiciona os valores as variaveis 
@@ -47,7 +45,7 @@ buttons.forEach(button => {
                     firstNumber += valor;
                     atualizarDisplay();
                 } else {
-                    secundNumber += valor
+                    secondNumber += valor
                     atualizarDisplay();
                 }
             }
@@ -58,9 +56,18 @@ buttons.forEach(button => {
     }) 
 })
 
+const operation: Operation[] = ['+', '-', '*', '/'];
+
+// FUNÇÃO RESETAR VALORES
+const resetarCalculadora = () => {
+    firstNumber = '';
+    secondNumber = '';
+    currentOperation = null;
+}
+
 // FUNÇÃO ATUALIZAR DISPLAY
 const atualizarDisplay = () => {
-    display.textContent = `${firstNumber} ${currentOperation ?? ''} ${secundNumber}`;
+    display.textContent = `${firstNumber} ${currentOperation ?? ''} ${secondNumber}`;
 }
 
 

@@ -2,16 +2,14 @@
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll(".btn");
 let firstNumber = '';
-let secundNumber = '';
+let secondNumber = '';
 let currentOperation = null;
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const valor = button.textContent;
         try {
             if (valor === 'AC') {
-                firstNumber = '';
-                secundNumber = '';
-                currentOperation = null;
+                resetarCalculadora();
                 display.textContent = '0';
             }
             else if (valor === '=') {
@@ -19,9 +17,9 @@ buttons.forEach(button => {
                     return;
                 }
                 else {
-                    const resultado = calcular(Number(firstNumber), Number(secundNumber), currentOperation);
+                    const resultado = calcular(Number(firstNumber), Number(secondNumber), currentOperation);
                     firstNumber = resultado.toString();
-                    secundNumber = '';
+                    secondNumber = '';
                     currentOperation = null;
                     atualizarDisplay();
                 }
@@ -36,7 +34,7 @@ buttons.forEach(button => {
                     atualizarDisplay();
                 }
                 else {
-                    secundNumber += valor;
+                    secondNumber += valor;
                     atualizarDisplay();
                 }
             }
@@ -46,8 +44,13 @@ buttons.forEach(button => {
         }
     });
 });
+const resetarCalculadora = () => {
+    firstNumber = '';
+    secondNumber = '';
+    currentOperation = null;
+};
 const atualizarDisplay = () => {
-    display.textContent = `${firstNumber} ${currentOperation ?? ''} ${secundNumber}`;
+    display.textContent = `${firstNumber} ${currentOperation ?? ''} ${secondNumber}`;
 };
 const somar = (n1, n2) => {
     return n1 + n2;
