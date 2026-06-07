@@ -1,81 +1,148 @@
-1. Melhorias de código (mais importantes)
-Criar uma função para verificar operações
+# 📝 Notas do Projeto
 
-Hoje você repete:
+Este documento contém ideias de melhorias e funcionalidades que poderão ser implementadas em versões futuras da calculadora.
 
-valor === '+' ||
-valor === '-' ||
-valor === '*' ||
-valor === '/'
+## 🔢 Funcionalidades
 
-Você poderia criar algo como:
+### Suporte a números decimais
 
-const operations: Operation[] = ['+', '-', '*', '/'];
+Permitir operações com valores decimais.
 
-E depois:
+Exemplos:
 
-operations.includes(valor as Operation)
+* 10.5 + 2.3
+* 15.75 / 3
 
-Isso facilita futuras expansões.
+Possíveis validações:
 
+* Impedir mais de um ponto decimal por número.
+* Permitir iniciar um número com `0.`.
 
-2. Melhorias de funcionalidade (mais interessantes para portfólio)
-Botão de apagar último caractere (←)
+---
+
+### Botão de apagar último dígito (←)
+
+Adicionar um botão para remover o último caractere digitado.
 
 Exemplo:
 
-123
+```text
+123 → 12 → 1 → 0
+```
 
-↓
+Objetivo:
 
-12
+* Melhorar a experiência do usuário.
+* Evitar a necessidade de limpar toda a operação.
 
-↓
+---
 
-1
+### Suporte ao teclado
 
-↓
+Permitir utilizar a calculadora através do teclado.
 
-0
+Mapeamento inicial:
 
-Você praticará:
+| Tecla     | Ação                 |
+| --------- | -------------------- |
+| 0-9       | Inserir número       |
+| +         | Soma                 |
+| -         | Subtração            |
+| *         | Multiplicação        |
+| /         | Divisão              |
+| Enter     | Calcular             |
+| Backspace | Apagar último dígito |
+| Escape    | Limpar calculadora   |
 
-Strings
-slice()
-Atualização de estado
-Números decimais
+---
 
-Permitir:
+### Histórico de operações
 
-10.5 + 2.3
+Armazenar as últimas operações realizadas.
 
-Isso demonstra domínio maior da lógica.
+Exemplo:
 
-Operações encadeadas
-
-Hoje:
-
+```text
 10 + 20 = 30
+50 - 15 = 35
+8 * 7 = 56
+```
 
-Depois:
+Objetivo:
 
-+ 5 =
+* Facilitar consultas.
+* Praticar manipulação de arrays e renderização dinâmica.
 
-↓
+---
 
-35
+## 🎨 Melhorias Visuais
 
-Se ainda não funciona, seria um ótimo recurso.
+### Animações
 
-Teclado
+Adicionar pequenas animações para:
 
-Permitir:
+* Clique dos botões.
+* Exibição do resultado.
+* Estados de hover.
 
-1
-+
-2
-Enter
+---
 
-Além dos botões.
+### Tema Dark Mode
 
-Isso impressiona bastante porque mostra conhecimento de eventos.
+Criar opção para alternar entre:
+
+* Tema claro
+* Tema escuro
+
+---
+
+### Melhorias de Layout
+
+* Ajustar responsividade para telas menores.
+* Melhorar espaçamento dos elementos.
+* Refinar tipografia e cores.
+
+---
+
+## 🧠 Melhorias Técnicas
+
+### Refatoração de Tipos
+
+Criar uma função auxiliar para identificar operações matemáticas:
+
+```ts
+isOperation(valor)
+```
+
+Objetivo:
+
+* Evitar type assertions desnecessárias.
+* Melhorar a legibilidade do código.
+
+---
+
+### Melhor tratamento de erros
+
+Exibir mensagens específicas para cada erro utilizando validações mais detalhadas.
+
+---
+
+### Testes
+
+Estudar e implementar testes para as funções matemáticas:
+
+* Soma
+* Subtração
+* Multiplicação
+* Divisão
+
+Utilizando ferramentas como:
+
+* Jest
+* Vitest
+
+---
+
+## 📚 Objetivo
+
+Este projeto foi desenvolvido para praticar conceitos de TypeScript, manipulação do DOM e gerenciamento de estado. As melhorias listadas aqui servirão como próximos passos para continuar evoluindo a aplicação e aprofundar conhecimentos em Front-end.

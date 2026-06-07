@@ -27,6 +27,20 @@ Durante o desenvolvimento, o foco principal foi aplicar conceitos de tipagem est
 * CSS3
 * TypeScript
 
+## 📁 Estrutura do Projeto
+
+PROJ_CALCULADORA/
+├──assets/
+│  └── preview.png 
+├── src/
+│   └── script.ts
+├── index.html
+├── script.js
+├── style.css
+├── Notas.md
+├── README.md
+└── tsconfig.json
+
 ## 📚 Conceitos Praticados
 
 ### TypeScript
@@ -68,17 +82,38 @@ Fluxo simplificado:
 
 A aplicação possui tratamento para divisão por zero utilizando `try/catch`, exibindo uma mensagem amigável ao usuário quando a operação não pode ser realizada.
 
+## 🔮 Melhorias Futuras
+
+- Suporte a números decimais
+- Botão para apagar último dígito (←)
+- Suporte ao teclado
+- Histórico de operações
+- Melhorias visuais e animações
+
 ## 🎯 Objetivo do Projeto
 
 Este projeto foi desenvolvido como parte do meu processo de aprendizado em TypeScript, com foco em fortalecer conhecimentos de lógica de programação, tipagem estática e manipulação de interfaces web.
 
+## 💡 Aprendizados
+
+Durante o desenvolvimento deste projeto pratiquei:
+
+- Manipulação do DOM com TypeScript
+- Tipagem de elementos HTML
+- Union Types
+- Type Aliases
+- Tratamento de erros com try/catch
+- Gerenciamento de estado em aplicações Front-end
+- Organização e reutilização de funções
+
 ## 📷 Preview
 
-Adicione aqui uma captura de tela do projeto após o deploy.
+![Preview da Calculadora](assets/preview.png)
 
 ## 🔗 Deploy
 
-Adicione aqui o link da aplicação publicada.
+👉 Acesse a aplicação:
+https://olavohenrique03.github.io/CalculadoraEmTypescript/
 
 ---
 

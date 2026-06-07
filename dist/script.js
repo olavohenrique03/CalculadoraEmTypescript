@@ -1,49 +1,10 @@
 "use strict";
 const display = document.querySelector("#display");
 const buttons = document.querySelectorAll(".btn");
+const operations = ['+', '-', '*', '/'];
 let firstNumber = '';
 let secondNumber = '';
 let currentOperation = null;
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const valor = button.textContent;
-        try {
-            if (valor === 'AC') {
-                resetarCalculadora();
-                display.textContent = '0';
-            }
-            else if (valor === '=') {
-                if (currentOperation === null) {
-                    return;
-                }
-                else {
-                    const resultado = calcular(Number(firstNumber), Number(secondNumber), currentOperation);
-                    firstNumber = resultado.toString();
-                    secondNumber = '';
-                    currentOperation = null;
-                    atualizarDisplay();
-                }
-            }
-            else if (valor === '+' || valor === '-' || valor === '*' || valor === '/') {
-                currentOperation = valor;
-                atualizarDisplay();
-            }
-            else {
-                if (currentOperation === null) {
-                    firstNumber += valor;
-                    atualizarDisplay();
-                }
-                else {
-                    secondNumber += valor;
-                    atualizarDisplay();
-                }
-            }
-        }
-        catch (error) {
-            display.textContent = "Não é possível dividir por zero!";
-        }
-    });
-});
 const resetarCalculadora = () => {
     firstNumber = '';
     secondNumber = '';
@@ -81,3 +42,43 @@ const calcular = (n1, n2, operation) => {
             throw new Error('Operação inválida');
     }
 };
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const valor = button.textContent;
+        try {
+            if (valor === 'AC') {
+                resetarCalculadora();
+                display.textContent = '0';
+            }
+            else if (valor === '=') {
+                if (currentOperation === null) {
+                    return;
+                }
+                else {
+                    const resultado = calcular(Number(firstNumber), Number(secondNumber), currentOperation);
+                    firstNumber = resultado.toString();
+                    secondNumber = '';
+                    currentOperation = null;
+                    atualizarDisplay();
+                }
+            }
+            else if (operations.includes(valor)) {
+                currentOperation = valor;
+                atualizarDisplay();
+            }
+            else {
+                if (currentOperation === null) {
+                    firstNumber += valor;
+                    atualizarDisplay();
+                }
+                else {
+                    secondNumber += valor;
+                    atualizarDisplay();
+                }
+            }
+        }
+        catch (error) {
+            display.textContent = "Não é possível dividir por zero!";
+        }
+    });
+});
